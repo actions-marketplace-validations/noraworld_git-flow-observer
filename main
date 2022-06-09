@@ -1,0 +1,91 @@
+#!/bin/sh
+
+set -eu
+
+main() {
+  head=$1
+  base=$2
+  head_with_origin=origin/$1
+  base_with_origin=origin/$2
+
+  validate "$@"
+
+  # "fast_forwarded" should be executed first because "has_only_merge_commits" is low performance
+  if ! fast_forwarded 1> /dev/null; then
+    if ! has_only_merge_commits 1> /dev/null; then
+      echo "Error: The $head_with_origin branch is not fast-forwarded." >&2
+      exit 2
+    else
+      echo "Info: The $base_with_origin branch has the commits that are not in the $head_with_origin branch, but it is OK because these commits are merge commits and their parent commits are contained within $head_with_origin branch all."
+    fi
+  else
+    echo "Congrats! The $head_with_origin branch is fast-forwarded!"
+  fi
+}
+
+fast_forwarded() {
+  if [ "$(git rev-list --count "$head_with_origin".."$base_with_origin")" -eq 0 ]; then
+    echo true
+    return 0
+  else
+    echo false
+    return 1
+  fi
+}
+
+# https://stackoverflow.com/questions/3824050/telling-if-a-git-commit-is-a-merge-revert-commit
+has_only_merge_commits() {
+  commits_only_in_base_branch=$(git rev-list "$head_with_origin".."$base_with_origin")
+  commits_only_in_head_branch=$(git rev-list "$base_with_origin".."$head_with_origin")
+  ok=true
+
+  if [ -n "$commits_only_in_base_branch" ] && [ -n "$commits_only_in_head_branch" ]; then
+    echo "Error: The $head branch and the $base branch have the commits that the other branch does not have each other." >&2
+    echo "$commits_only_in_base_branch" | xargs echo "       The commits that are not in the $head branch:" >&2
+    echo "$commits_only_in_head_branch" | xargs echo "       The commits that are not in the $base branch:" >&2
+    ok=false
+  fi
+
+  for commit in $commits_only_in_base_branch; do
+    # set false if base branch has non-merge commits that are not in head branch
+    if [ "$(git cat-file -p "$commit" | grep -cE "^parent")" -lt 2 ]; then
+      echo "Error: The $base branch has the non-merge commit \"$commit\" that is not in the $head branch." >&2
+      ok=false
+    fi
+
+    # set false if there are commits whose parents are not in head branch
+    for parent_commit in $(git cat-file -p "$commit" | grep -E "^parent" | awk '{ print $2 }'); do
+      if [ "$(git branch -a --contains "$parent_commit" | grep -cE "$head")" -eq 0 ]; then
+        echo "Error: The commit \"$commit\" (in the $base branch) has the parent commit \"$parent_commit\" that is not in the $head branch." >&2
+        ok=false
+      fi
+    done
+  done
+
+  if $ok; then
+    echo true
+    return 0
+  else
+    echo false
+    return 1
+  fi
+}
+
+validate() {
+  if [ "$#" -ne 2 ]; then
+    echo "Fatal: Require two arguments." >&2
+    exit 1
+  fi
+
+  if [ -z "$(git rev-parse --verify --quiet "$head_with_origin")" ]; then
+    echo "Fatal: The $head_with_origin branch does not exist." >&2
+    exit 1
+  fi
+
+  if [ -z "$(git rev-parse --verify --quiet "$base_with_origin")" ]; then
+    echo "Fatal: The $base_with_origin branch does not exist." >&2
+    exit 1
+  fi
+}
+
+main "$@"

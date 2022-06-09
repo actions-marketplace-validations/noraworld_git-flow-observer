@@ -1,0 +1,26 @@
+name: "git-flow observer"
+description: "git-flow observer allows you to check your project is in correct operation as git-flow"
+author: "noraworld"
+branding:
+  icon: git-branch
+  color: blue
+
+inputs:
+  head:
+    description: "The branch name as basis for comparison"
+    required: true
+  base:
+    description: "The branch name that is checked whether or not fast-forwarded"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Enable Git operation
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Observe
+      run: ${{ github.action_path }}/main ${{ inputs.head }} ${{ inputs.base }}
+      shell: sh
