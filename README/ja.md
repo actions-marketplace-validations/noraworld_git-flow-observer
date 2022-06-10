@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Observe"
-        uses: noraworld/git-flow-observer@latest
+        uses: noraworld/git-flow-observer@v0.1.0
         with:
           head: "develop"
           base: "main"
