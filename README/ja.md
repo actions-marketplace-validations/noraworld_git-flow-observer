@@ -52,8 +52,8 @@ jobs:
 | キー | 説明 | 必須かどうか | サンプル値 |
 | --- | --- | :------: | --- |
 | `jobs.git-flow-observer.if` | ジョブをスキップするときの条件を指定します | False | `github.head_ref != 'main' \|\| github.base_ref != 'develop'` |
-| `jobs.git-flow-observer.steps[*].with.head` | 比較の対象となるブランチを指定します | True | `"develop"` |
-| `jobs.git-flow-observer.steps[*].with.base` | fast-forwarded かどうかをチェックするブランチを指定します | True | `"main"` |
+| `jobs.git-flow-observer.steps[*].with.head` | fast-forwarded かどうかをチェックするブランチを指定します | True | `"develop"` |
+| `jobs.git-flow-observer.steps[*].with.base` | 比較の対象となるブランチを指定します | True | `"main"` |
 
 HINT: `"main"` の代わりに `"master"` を指定する必要があるかもしれません。
 
