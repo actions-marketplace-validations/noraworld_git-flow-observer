@@ -28,7 +28,7 @@ Replace a part of the above YAML code with the following.
 
 | Key                                         | Description                                                         | Required | Sample Value                                                |
 | ------------------------------------------- | ------------------------------------------------------------------- | :------: | ----------------------------------------------------------- |
-| `jobs.git-flow-observer.if`                 | Specify conditions when to skip a job                               | False    | `github.head_ref != 'main' || github.base_ref != 'develop'` |
+| `jobs.git-flow-observer.if`                 | Specify conditions when to skip a job                               | False    | `github.head_ref != 'main' \|\| github.base_ref != 'develop'` |
 | `jobs.git-flow-observer.steps[*].with.head` | Specify a branch name as basis for comparison                       | True     | `"develop"`                                                 |
 | `jobs.git-flow-observer.steps[*].with.base` | Specify a branch name that is checked whether or not fast-forwarded | True     | `"main"`                                                    |
 
