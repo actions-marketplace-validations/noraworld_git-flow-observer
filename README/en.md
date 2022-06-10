@@ -66,17 +66,17 @@ That’s done!
 
 First, you need to make a head branch fast-forwarded. In most cases, it can be resolved by creating and merging a new pull request from a base branch into a head branch.
 
-![Merge from main into develop](screenshots/merge_from_main_into_develop_pr.png)
+![Merge from main into develop](/screenshots/merge_from_main_into_develop_pr.png)
 
 2. Re-run jobs
 
 Then re-run jobs referring to the following screenshots.
 
-![Failed CI details](screenshots/failed_ci_details.png)
+![Failed CI details](/screenshots/failed_ci_details.png)
 
-![Re-run jobs button](screenshots/rerun_jobs_button.png)
+![Re-run jobs button](/screenshots/rerun_jobs_button.png)
 
-![Re-run jobs dialog](screenshots/rerun_jobs_dialog.png)
+![Re-run jobs dialog](/screenshots/rerun_jobs_dialog.png)
 
 ### How can I force PRs to require status checks to pass before merging?
 
@@ -88,7 +88,7 @@ HINT: `Settings` is in your repository, not your account settings.
 
 2. Enter a branch name pattern you want to set up, enable `Require status checks to pass before merging`, and add git-flow observer to the status checks list
 
-![Branch protection rule](screenshots/branch_protection_rule.png)
+![Branch protection rule](/screenshots/branch_protection_rule.png)
 
 3. Click a `Create` button at the bottom of the page
 
