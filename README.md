@@ -1,4 +1,23 @@
 # git-flow observer
+git-flow observer is a CI tool made with GitHub Actions that allows you to check your project is in correct operation as git-flow.
+
+
+
+## How it works
+git-flow observer basically checks whether or not a head branch (in most cases this is a `develop` branch) is fast-forwarded compared to a base branch (in most cases this is a `main` branch.) It will pass if a head branch is fast-forwarded. Otherwise it will fail.
+
+Here are some cases.
+
+* It will fail when creating a pull request without a back-merge after merging a pull request...
+    * into a head branch (`develop`)
+    * from a release branch into a base branch (`main`) with additional commits
+    * from a hotfix branch into a base branch (`main`)
+    * with cherry-pick commits
+* It will be skipped when creating a pull request from a base branch (`main`) into a head branch (`develop`) (a back-merge PR) [^1]
+
+[^1]: Only in case you set `if: github.head_ref != 'main' || github.base_ref != 'develop'` in your workflow YAML.
+
+You will be able to realize your project isn’t in correct operation as git-flow if it fails.
 
 
 
@@ -31,6 +50,10 @@ Replace a part of the above YAML code with the following.
 | `jobs.git-flow-observer.if`                 | Specify conditions when to skip a job                               | False    | `github.head_ref != 'main' \|\| github.base_ref != 'develop'` |
 | `jobs.git-flow-observer.steps[*].with.head` | Specify a branch name as basis for comparison                       | True     | `"develop"`                                                 |
 | `jobs.git-flow-observer.steps[*].with.base` | Specify a branch name that is checked whether or not fast-forwarded | True     | `"main"`                                                    |
+
+HINT: You may need to set a base branch as `"master"` instead of `"main"`.
+
+HINT: You setting up a `if: github.head_ref != 'main' || github.base_ref != 'develop'` statement, it will be skipped when a pull request from a base branch into a head branch. This may help fix the status check failure easier.
 
 That’s done!
 
@@ -72,3 +95,8 @@ HINT: `Settings` is in your repository, not your account settings.
 4. Repeat the procedure 1 through 3 for every branch
 
 HINT: It is recommended to set up in both your head and base branches.
+
+
+
+## License
+All codes of this repository are available under the MIT license. See the [LICENSE](LICENSE) for more information.
