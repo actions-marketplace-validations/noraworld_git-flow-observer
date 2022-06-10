@@ -1,4 +1,8 @@
 # git-flow observer
+
+| [English](/README/en.md) | **日本語** |
+| ------------------------ | --------- |
+
 git-flow observer は、プロジェクトが git-flow として正しく運用されているかどうかをチェックする GitHub Actions 製の CI ツールです。
 
 
