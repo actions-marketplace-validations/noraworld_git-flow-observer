@@ -12,8 +12,8 @@ git-flow observer basically checks whether or not a head branch (in most cases t
 
 Here are some cases.
 
-* It will fail when creating a pull request without a back-merge after merging a pull request...
-    * into a head branch (`develop`)
+* It will fail when creating a new pull request without a back-merge after merging a pull request...
+    * into a head branch (`develop`) with a base branch (`main`) including only merge-commits that are not in a head branch (`develop`)
     * from a release branch into a base branch (`main`) with additional commits
     * from a hotfix branch into a base branch (`main`)
     * with cherry-pick commits
