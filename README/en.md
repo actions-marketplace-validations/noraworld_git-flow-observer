@@ -103,4 +103,4 @@ HINT: It is recommended to set up in both your head and base branches.
 
 
 ## License
-All codes of this repository are available under the MIT license. See the [LICENSE](/LICENSE) for more information.
+All codes of this project are available under the MIT license. See the [LICENSE](/LICENSE) for more information.
