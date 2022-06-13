@@ -70,17 +70,21 @@ HINT: `if: github.head_ref != 'main' || github.base_ref != 'develop'` を設定�
 
 まず、ヘッドブランチを fast-forwarded にします。ほとんどの場合、ベースブランチからヘッドブランチにマージする PR を作りマージすることで解決できます。
 
-![Merge from main into develop](/screenshots/merge_from_main_into_develop_pr.png)
+| ![Merge from main into develop](/screenshots/merge_from_main_into_develop_pr.png) |
+| --------------------------------------------------------------------------------- |
 
 2. ジョブを再実行する
 
 その後、以下のスクリーンショットに従いジョブを再実行します。
 
-![Failed CI details](/screenshots/failed_ci_details.png)
+| ![Failed CI details](/screenshots/failed_ci_details.png) |
+| -------------------------------------------------------- |
 
-![Re-run jobs button](/screenshots/rerun_jobs_button.png)
+| ![Re-run jobs button](/screenshots/rerun_jobs_button.png) |
+| --------------------------------------------------------- |
 
-![Re-run jobs dialog](/screenshots/rerun_jobs_dialog.png)
+| ![Re-run jobs dialog](/screenshots/rerun_jobs_dialog.png) |
+| --------------------------------------------------------- |
 
 ### PR をマージする前に CI が通っていることを必須にしたい場合はどうしたら良いですか?
 
@@ -92,7 +96,8 @@ HINT: `Settings` はアカウントの設定ではなくリポジトリの設定
 
 2. 設定したいブランチのブランチ名パターンを入力し、`Require status checks to pass before merging` を有効し、git-flow observer をステータスチェックリストに追加します
 
-![Branch protection rule](/screenshots/branch_protection_rule.png)
+| ![Branch protection rule](/screenshots/branch_protection_rule.png) |
+| ------------------------------------------------------------------ |
 
 3. ページ下部の `Create` ボタンをクリックします
 
