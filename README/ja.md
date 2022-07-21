@@ -8,7 +8,7 @@ git-flow observer は、プロジェクトが git-flow として正しく運用�
 
 
 ## 紹介記事
-[プロジェクトが git-flow に従っているかどうか監視する GitHub Actions を作った](https://zenn.dev/noraworld/articles/git-flow-observer)
+* [プロジェクトが git-flow に従っているかどうか監視する GitHub Actions を作った](https://zenn.dev/noraworld/articles/git-flow-observer)
 
 
 
