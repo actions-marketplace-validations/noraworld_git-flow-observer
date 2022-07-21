@@ -7,6 +7,11 @@ git-flow observer は、プロジェクトが git-flow として正しく運用�
 
 
 
+## 紹介記事
+[プロジェクトが git-flow に従っているかどうか監視する GitHub Actions を作った](https://zenn.dev/noraworld/articles/git-flow-observer)
+
+
+
 ## 仕組み
 ヘッドブランチ (多くの場合、`develop` ブランチ) がベースブランチ (多くの場合、`main` ブランチ) と比べて fast-forwarded かどうかをチェックします。ヘッドブランチが fast-forwarded だった場合は CI が通りますが、そうでなければ失敗します。
 
